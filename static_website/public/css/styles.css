@@ -1,0 +1,299 @@
+
+@import url(http://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+
+body {
+  font-family: 'Open Sans Hebrew', sans-serif;
+  font-size: 30px;
+  margin:0;
+  padding:0;
+  border: 0;
+  direction: rtl;
+}
+
+.content {
+  min-height: calc(100vh - 70px);
+}
+
+.header {
+  height: 56px;
+}
+
+.main {
+  height: 100%;
+  position: relative;
+}
+
+.main-top {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(248, 249, 255);
+  margin-top: 40;
+}
+
+.main-top-left {
+  width: 350px;
+  min-width: 350px;
+  max-width: 350px;
+  height: 100%;
+  margin: 0 16 0 16;
+}
+
+.who-we-are {
+  direction: rtl;
+  padding: 10px 0px 0px;
+  display: flex;
+}
+
+.who-we-are img {
+  width: 40px;
+  height: 40px;
+}
+
+.who-we-are .text {
+  font-size: 13px;
+  padding: 2px 8px;
+}
+
+.project-description {
+  font-size: 13px;
+  padding-top: 10px;
+  white-space: pre-line;
+  line-height: 18px;
+}
+
+.our-name {
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.project-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.main-top-right {
+  width: 660px;
+  height: 100%;
+  margin-left: 16px;
+  /* background-color: blue; */
+}
+
+.main-top-right img {
+  width: 100%;
+  max-height: 335px;
+  object-fit: contain;
+}
+
+.donation-status .progress-bar-full {
+  display: none; /*remove to show progress*/
+  height: 4px;
+  border-radius: 2px;
+  background-color: #eeeff2;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-status .progress-bar {
+  display: none; /*remove to show progress*/
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgb(160, 56, 160);
+  transform: translateX(98%);
+
+}
+
+.donation-status .donation-percent {
+  display: none; /*remove to show progress*/
+  font-size: 13px;
+  text-align: left;
+  transform: translateX(98%);
+  line-height: 28px;
+  font-weight: bold;
+  color:rgb(160, 56, 160);
+}
+
+.donation-status .progress-info {
+  display: none; /*remove to show progress*/
+  /*display: flex;*/
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 18px;
+}
+
+.donation-status .progress-info-labels {
+  display: none; /*remove to show progress*/
+  /*display: flex;*/
+  justify-content: space-between;
+  font-size: 11px;
+  line-height: 17px;
+  color: rgb(125, 125, 125);
+}
+
+.donation-status button {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: bold;
+  height: 48px;
+  width: 100%;
+  border: 0;
+  border-radius: 3px;
+  background-color: rgb(73, 6, 117);
+  margin-top: 32px;
+  cursor:pointer;
+}
+
+.main-separator {
+  width: 100%;
+  height: 54px;
+  bottom: -1px;
+  position: absolute;
+  border-top: 1px solid rgb(206, 210, 211);
+  border-bottom: 1px solid rgb(206, 210, 211);
+  background-color: rgba(0, 0, 0, 0);
+  z-index: -1;
+}
+
+
+
+
+ /* Main middle */
+
+.main-middle {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.main-middle-right {
+  height: 100%;
+  width: 1000px;
+}
+
+.tabs-container {
+  position: relative;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tabs button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  min-width: 140px;
+  height: 55px;
+  background-color: transparent;
+}
+
+.tabs .selected {
+  font-weight: bold;
+}
+
+.tab-selected {
+  height: 2px;
+  width: 140px;
+  position: absolute;
+  background-color: rgb(163, 60, 166);
+  bottom: 0px;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  right: 0px;
+}
+
+.tab-content {
+  display: none;
+  width: 1000px;
+  font-size: 18px;
+  white-space: pre-line;
+  line-height: 22px;
+}
+
+.selected-tab-content {
+  display: unset;
+}
+
+.tab-content-container {
+  margin: 15px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (max-width:800px) {
+  .main-top-left {
+    width: unset;
+    min-width: unset;
+    max-width: unset;
+    margin: 0px 50px;
+  }
+}
+
+@media (max-width:660px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .main-top {
+    flex-direction: column;
+  }
+
+  .main-top-right {
+    width: 100%;
+    margin-left: unset;
+  }
+
+  .main-top-left {
+    width: unset;
+    min-width: unset;
+    max-width: unset;
+    margin: 0px 12px;
+  }
+
+  .main-middle-right {
+    width: unset;
+  }
+
+  .tab-content {
+    width: unset;
+    min-width: unset;
+    max-width: unset;
+  }
+
+  .tab-content-container {
+    justify-content: unset;
+    margin-bottom: 50px;
+  }
+
+  .main-middle {
+    flex-direction: column;
+  }
+
+  .header {
+    height: 0px;
+  }
+
+  .tabs button {
+    min-width: 33%;
+  }
+
+  .tab-selected {
+    width: 33%;
+  }
+
+}
+
+footer {
+  font-size: 15px;
+  height:70px;
+  white-space: pre-line;
+  background-color: DarkSlateGrey;
+  text-align: center;
+  color: grey;
+  width: 100%;
+}
+
+
