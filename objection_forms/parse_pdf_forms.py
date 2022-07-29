@@ -66,19 +66,22 @@ def extract_data(pdf_file_path: str) -> List[str]:
     page = doc.get_page(0)
     parser = page.get_textpage()
 
+    coord_class = CoordinatesNosahBet if parser.search("נוסח ב").get_next() is not None else CoordinatesNosahAlef
     res = [
         parser.get_text(*bounds).strip(" :_\r\n\t")
         for bounds in (
-            CoordinatesNosahBet.name_boundaries,
-            CoordinatesNosahBet.id_boundaries,
-            CoordinatesNosahBet.street_boundaries,
-            CoordinatesNosahBet.building_boundaries,
-            CoordinatesNosahBet.apt_boundaries,
-            CoordinatesNosahBet.email_boundaries,
-            CoordinatesNosahBet.phone_boundaries,
+            coord_class.name_boundaries,
+            coord_class.id_boundaries,
+            coord_class.street_boundaries,
+            coord_class.building_boundaries,
+            coord_class.apt_boundaries,
+            coord_class.email_boundaries,
+            coord_class.phone_boundaries,
         )
     ]
+    res[1] = normalize_num(res[1])
     res[2] = normalize_street(res[2])
+    res[6] = normalize_num(res[6])
 
     parser.close()
     page.close()
@@ -92,7 +95,14 @@ def normalize_street(raw: str) -> str:
         for word in street.split():
             if word in raw_words_set:
                 return street
-    print(f"WARN: unidentified street: {raw}")
+    # print(f"WARN: unidentified street: {raw}")
+    return raw
+
+
+def normalize_num(raw: str) -> str:
+    raw = raw.replace("/", "").replace("-", "").replace(" ", "")
+    if len(raw) + 1 == len("0544445555") and raw[0] != "0":
+        raw = "0" + raw
     return raw
 
 
@@ -128,6 +138,27 @@ if __name__ == "__main__":
     """
     install pdf dependency by
         pip3 install --no-build-isolation -U pypdfium2
+
+    search coordinates by parser.search('written text').get_next()
+
+    investigate unknowns:
+        extracted_details = []
+        known_forms = []
+        unknown_forms = []
+        error_forms = []
+        for form in os.listdir('./outcome/'):
+                form_path = os.path.join('outcome', form)
+                try:
+                    extracted_details.append(extract_data(form_path))
+                    r = extracted_details[-1]
+                    if len(df[df['phone'] == r[6]]) > 0:  # can use ID
+                        known_forms.append(form_path)
+                    else:
+                        unknown_forms.append(form_path)
+                except Exception as e:
+                    print('ERROR:::>', form_path, e)
+                    error_forms.append(form_path)
+        len(unknown_forms)
     """
     # % history - f pdf_extract.py
     main()
